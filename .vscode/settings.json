@@ -1,0 +1,20 @@
+{
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "xprotocol",
+        "enableSsl": "Disabled"
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 33060,
+      "driver": "MySQL",
+      "connectionTimeout": 30,
+      "database": "dbsproject",
+      "username": "root",
+      "name": "dbsproject-local",
+      "askForPassword": true
+    }
+  ]
+}
