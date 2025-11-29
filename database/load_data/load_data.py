@@ -1,6 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+import json
+import ast
 
 try:
     conn = mysql.connector.connect(
@@ -99,30 +101,42 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 # conn.commit()
 
 # LOAD MATCHES DATA
-matches_df = pd.read_csv('matches.csv')
-for _, row in matches_df.iterrows():
-    cursor.execute("""
-        INSERT INTO matches (match_id, season_id, league_id, matchday, home_team_id, away_team_id, winner, utc_date)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-    """, (row['match_id'], row['season_id'], row['league_id'], row['matchday'], row['home_team_id'], row['away_team_id'], row['winner'], row['utc_date']))
-conn.commit()
+# matches_df = pd.read_csv('matches.csv')
+# for _, row in matches_df.iterrows():
+#     cursor.execute("""
+#         INSERT INTO matches (match_id, season_id, league_id, matchday, home_team_id, away_team_id, winner, `utc_date`)
+#         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+#     """, (row['match_id'], row['season_id'], row['league_id'], row['matchday'], row['home_team_id'], row['away_team_id'], row['winner'], row['utc_date']))
+# conn.commit()
 
 # LOAD SCORES DATA
-scores_df = pd.read_csv('scores.csv')
-for _, row in scores_df.iterrows():
-    cursor.execute("""
-        INSERT INTO scores (score_id, match_id, full_time_home, full_time_away, half_time_home, half_time_away)
-        VALUES (%s, %s, %s, %s, %s, %s)
-    """, (int(row['score_id']), int(row['match_id']), int(row['full_time_home']), int(row['full_time_away']), int(row['half_time_home']), int(row['half_time_away'])))
-conn.commit()
+# scores_df = pd.read_csv('scores.csv')
+# for _, row in scores_df.iterrows():
+#     cursor.execute("""
+#         INSERT INTO scores (score_id, match_id, full_time_home, full_time_away, half_time_home, half_time_away)
+#         VALUES (%s, %s, %s, %s, %s, %s)
+#     """, (int(row['score_id']), int(row['match_id']), int(row['full_time_home']), int(row['full_time_away']), int(row['half_time_home']), int(row['half_time_away'])))
+# conn.commit()
 
 # LOAD STANDINGS DATA
+cursor.execute("TRUNCATE TABLE standings;")
+
 standings_df = pd.read_csv('standings.csv')
+
 for _, row in standings_df.iterrows():
+    form_str = row['form']
+    if pd.isna(form_str) or form_str == "":
+        form_json = None
+    else:
+        # Convert "['D','W']" → ['D','W']
+        python_list = ast.literal_eval(form_str)
+        form_json = json.dumps(python_list)
+    
     cursor.execute("""
-        INSERT INTO matches (standing_id, season_id, league_id, position, team_id, played_games, won, draw, lost, points, goals_for, goals_against, goal_difference, form)
+        INSERT INTO standings (standing_id, season_id, league_id, position, team_id, played_games, won, draw, lost, points, goals_for, goals_against, goal_difference, form)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (row['standing_id'], row['season_id'], row['league_id'], row['position'], row['team_id'], row['played_games'], row['won'], row['draw'], row['lost'], row['points'], row['goals_for'], row['goals_against'], row['goal_difference'], row['form']))
+    """, (row['standing_id'], row['season_id'], row['league_id'], row['position'], row['team_id'], row['played_games'], row['won'], row['draw'], row['lost'], row['points'], row['goals_for'], row['goals_against'], row['goal_difference'], form_json))
+
 conn.commit()
 
 cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
