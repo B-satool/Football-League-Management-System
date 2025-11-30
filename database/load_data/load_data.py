@@ -119,23 +119,51 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 # conn.commit()
 
 # LOAD STANDINGS DATA
-cursor.execute("TRUNCATE TABLE standings;")
+# cursor.execute("TRUNCATE TABLE standings;")
+# standings_df = pd.read_csv('standings.csv')
+# for _, row in standings_df.iterrows():
+#     form_str = row['form']
+#     if pd.isna(form_str) or form_str == "":
+#         form_json = None
+#     else:
+#         # Convert "['D','W']" → ['D','W']
+#         python_list = ast.literal_eval(form_str)
+#         form_json = json.dumps(python_list)
+#     
+#     cursor.execute("""
+#         INSERT INTO standings (standing_id, season_id, league_id, position, team_id, played_games, won, draw, lost, points, goals_for, goals_against, goal_difference, form)
+#         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+#     """, (int(row['standing_id']), int(row['season_id']), int(row['league_id']), int(row['position']), int(row['team_id']), int(row['played_games']), int(row['won']), int(row['draw']), int(row['lost']), int(row['points']), int(row['goals_for']), int(row['goals_against']), int(row['goal_difference']), form_json))
+# conn.commit()
 
-standings_df = pd.read_csv('standings.csv')
+# LOAD SCORERS DATA
+scorers_df = pd.read_csv('scorers.csv')
 
-for _, row in standings_df.iterrows():
-    form_str = row['form']
-    if pd.isna(form_str) or form_str == "":
-        form_json = None
-    else:
-        # Convert "['D','W']" → ['D','W']
-        python_list = ast.literal_eval(form_str)
-        form_json = json.dumps(python_list)
-    
+for _, row in scorers_df.iterrows():
     cursor.execute("""
-        INSERT INTO standings (standing_id, season_id, league_id, position, team_id, played_games, won, draw, lost, points, goals_for, goals_against, goal_difference, form)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (row['standing_id'], row['season_id'], row['league_id'], row['position'], row['team_id'], row['played_games'], row['won'], row['draw'], row['lost'], row['points'], row['goals_for'], row['goals_against'], row['goal_difference'], form_json))
+        INSERT INTO scorers (scorer_id, player_id, season_id, league_id, goals, assists, penalties)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """, (int(row['scorer_id']), int(row['player_id']), int(row['season_id']), int(row['league_id']), int(row['goals']), int(row['assists']), int(row['penalties'])))
+conn.commit()
+
+# LOAD MATCH_REFEREES DATA
+match_referees_df = pd.read_csv('match_referees.csv')
+
+for _, row in match_referees_df.iterrows():
+    cursor.execute("""
+        INSERT INTO match_referees (match_id, referee_id)
+        VALUES (%s, %s)
+    """, (int(row['match_id']), int(row['referee_id'])))
+conn.commit()
+
+# LOAD COUNTRIES DATA
+countries_df = pd.read_csv('countries.csv')
+
+for _, row in countries_df.iterrows():
+    cursor.execute("""
+        INSERT INTO countries (country_id, name, flag_url)
+        VALUES (%s, %s, %s)
+    """, (row['country_id'], row['name'], row['flag_url']))
 
 conn.commit()
 
