@@ -1,0 +1,97 @@
+coach_id,name,team_id,nationality
+34,N/A,354,
+35,N/A,356,
+36,N/A,389,
+37,N/A,397,
+38,N/A,402,
+39,N/A,563,
+40,N/A,1044,
+101,Kersten Kuhl,1,Germany
+102,Pellegrino Matarazzo,2,USA
+103,Xabi Alonso,3,Spain
+104,Edin Terzić,4,Germany
+105,Thomas Tuchel,5,Germany
+106,Sebastian Hoeneß,10,Germany
+107,Ralph Hasenhüttl,11,Austria
+108,Ole Werner,12,Germany
+109,Bo Henriksen,15,Denmark
+110,Jess Thorup,16,Denmark
+111,Christian Streich,17,Germany
+112,Gerardo Seoane,18,Switzerland
+113,Dino Toppmöller,19,Germany
+114,Marco Grote,28,Germany
+115,Heiko Butscher,36,Germany
+116,Frank Schmidt,44,Germany
+117,Torsten Lieberknecht,55,Germany
+118,Marco Rose,721,Germany
+41,Stefano Pioli,98,Italy
+42,Vincenzo Italiano,99,Italy
+43,Daniele De Rossi,100,Italy
+44,Gian Piero Gasperini,102,Italy
+45,Thiago Motta,103,Italy
+46,Claudio Ranieri,104,Italy
+47,Alberto Gilardino,107,Italy
+48,Gianluca Zappalà,108,Italy
+49,Paolo Montero,109,Uruguay
+50,Igor Tudor,110,Croatia
+51,Francesco Calzona,113,Italy
+52,Fabio Cannavaro,115,Italy
+53,Davide Nicola,445,Italy
+54,Marco Baroni,450,Italy
+55,Stefano Colantuono,455,Italy
+56,Eusebio Di Francesco,470,Italy
+57,Davide Ballardini,471,Italy
+58,Ivan Juric,586,Croatia
+59,Luca Gotti,5890,Italy
+60,Raffaele Palladino,5911,Italy
+61,Ernesto Valverde,77,Spain
+62,Diego Simeone,78,Argentina
+63,Jagoba Arrasate,79,Spain
+64,Xavi Hernandez,81,Spain
+65,Pepe Bordalás,82,Spain
+66,Fernando Machado,83,Uruguay
+67,Carlo Ancelotti,86,Italy
+68,Iñigo Pérez,87,Spain
+69,Javier Aguirre,89,Mexico
+70,Manuel Pellegrini,90,Chile
+71,Imanol Alguacil,92,Spain
+72,Marcelino,94,Spain
+73,Rubén Baraja,95,Spain
+74,Luís García,263,Spain
+75,Mauricio Pellegrino,264,Argentina
+76,Pepe Mel,267,Spain
+77,Albert Peris,275,Spain
+78,Michel,298,Spain
+79,Claudio,558,Spain
+80,Quique Flores,559,Spain
+81,Carles Martínez,511,Spain
+83,Jean-Louis Gasset,516,France
+84,Michel Der Zakarian,518,France
+85,Paulo Fonseca,521,Portugal
+86,Francesco Farioli,522,Italy
+87,Damien Della Santa,523,France
+88,Luis Enrique,524,Spain
+89,Regis Le Bris,525,France
+90,Bouziane Benaraïbi,529,Algeria
+91,Luka Elsner,533,Slovenia
+92,Pascal Gastien,541,France
+94,László Bölöni,545,Romania
+96,Samba Diawara,547,Mali
+98,Patrick Vieira,576,France
+82,Eric Roy,512,France
+93,Antoine Kombouare,543,France
+95,Franck Haise,546,France
+97,Adi Hütter,548,Austria
+31,Gary O'Neil,76,
+21,Mikel Arteta,57,Spain
+22,Unai Emery,58,Spain
+26,Jürgen Klopp,64,Germany
+23,Enzo Maresca,61,Italy
+24,Sean Dyche,62,England
+25,Marco Silva,63,Portugal
+27,Pep Guardiola,65,Spain
+28,Erik ten Hag,66,Netherlands
+29,Eddie Howe,67,England
+30,Ange Postecoglou,73,Greece
+32,Vincent Kompany,328,Belgium
+33,Nuno Espirito Santo,351,Portugal
