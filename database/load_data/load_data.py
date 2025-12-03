@@ -26,33 +26,40 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 
 # LOAD LEAGUES DATA
-#leagues_df = pd.read_csv('leagues.csv')
-# Insert rows
-#for _, row in leagues_df.iterrows():
-#    cursor.execute("""
+# leagues_df = pd.read_csv('leagues.csv')
+#
+# for _, row in leagues_df.iterrows():
+#     cursor.execute("""
 #        INSERT INTO leagues (league_id, name, country, country_id, icon_url, cl_spot, uel_spot, relegation_spot)
 #        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
 #    """, (row['league_id'], row['name'], row['country'], row['country_id'], row['icon_url'], row['cl_spot'], row['uel_spot'],  row['relegation_spot']))
-#conn.commit()
+# conn.commit()
 
 # LOAD STADIUMS DATA
 # stadiums_df = pd.read_csv('stadiums.csv')
 # for _, row in stadiums_df.iterrows():
+#     capacity = row['capacity']
+#     if pd.isna(capacity):
+#         capacity = None  # MySQL will insert NULL
 #     cursor.execute("""
 #         INSERT INTO stadiums (stadium_id, name, location, capacity)
 #         VALUES (%s, %s, %s, %s)
-#     """, (row['stadium_id'], row['name'], row['location'], row['capacity']))
+#     """, (row['stadium_id'], row['name'], row['location'], capacity))
 # conn.commit()
 
 # LOAD COACHES DATA
 # coaches_df = pd.read_csv('coaches.csv')
+
 # for _, row in coaches_df.iterrows():
-# 
+#
+#     nationality = None if pd.isna(row['nationality']) else str(
+#         row['nationality']).strip()
+#
 #     # Skip rows with missing or empty names
 #     if pd.isna(row['name']) or str(row['name']).strip() == "":
 #         print(f"Skipping row due to missing coach name: {row}")
 #         continue
-# 
+#
 #     cursor.execute("""
 #         INSERT INTO coaches (coach_id, name, team_id, nationality)
 #         VALUES (%s, %s, %s, %s)
@@ -60,16 +67,19 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 #         row['coach_id'],
 #         row['name'].strip(),
 #         row['team_id'],
-#         row['nationality']
+#         nationality
 #     ))
 # conn.commit()
+
 # LOAD REFEREES DATA
 # referees_df = pd.read_csv('referees.csv')
 # for _, row in referees_df.iterrows():
+#     nationality = None if pd.isna(row['nationality']) else str(
+#         row['nationality']).strip()
 #     cursor.execute("""
 #         INSERT INTO referees (referee_id, name, nationality)
 #         VALUES (%s, %s, %s)
-#     """, (row['referee_id'], row['name'], row['nationality']))
+#     """, (row['referee_id'], row['name'], nationality))
 # conn.commit()
 
 # LOAD SEASONS DATA
@@ -83,12 +93,15 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 
 # LOAD TEAMS DATA
 # teams_df = pd.read_csv('teams.csv')
-# Insert rows
 # for _, row in teams_df.iterrows():
+#
+#     founded_year = None if pd.isna(row['founded_year']) else str(
+#         row['founded_year']).strip()
+#
 #     cursor.execute("""
 #         INSERT INTO teams (team_id, name, founded_year, stadium_id, league_id, coach_id, cresturl)
 #         VALUES (%s, %s, %s, %s, %s, %s, %s)
-#     """, (row['team_id'], row['name'], row['founded_year'], row['stadium_id'], row['league_id'], row['coach_id'], row['cresturl']))
+#     """, (row['team_id'], row['name'], founded_year, row['stadium_id'], row['league_id'], row['coach_id'], row['cresturl']))
 # conn.commit()
 
 # LOAD PLAYERS DATA
@@ -129,7 +142,6 @@ cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
 #         # Convert "['D','W']" → ['D','W']
 #         python_list = ast.literal_eval(form_str)
 #         form_json = json.dumps(python_list)
-#     
 #     cursor.execute("""
 #         INSERT INTO standings (standing_id, season_id, league_id, position, team_id, played_games, won, draw, lost, points, goals_for, goals_against, goal_difference, form)
 #         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
