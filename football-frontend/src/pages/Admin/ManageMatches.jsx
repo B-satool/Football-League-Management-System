@@ -11,6 +11,10 @@ export default function ManageMatches() {
   const [selectedLeague, setSelectedLeague] = useState("");
   const [selectedSeason, setSelectedSeason] = useState("");
 
+  const uniqueSeasonYears = [
+    ...new Map(seasons.map((s) => [s.year, s])).values(),
+  ];
+
   const [formData, setFormData] = useState({
     season_id: "",
     league_id: "",
@@ -57,14 +61,21 @@ export default function ManageMatches() {
       ]);
 
       setLeagues(leaguesData.leagues || []);
-      setSeasons(seasonsData.seasons || []);
+
+      const seasonsList = seasonsData.seasons || [];
+
+      const uniqueSeasons = [
+        ...new Map(seasonsList.map((s) => [s.year, s])).values(),
+      ];
+
+      setSeasons(uniqueSeasons);
 
       // Set default season to latest
-      if (seasonsData.seasons && seasonsData.seasons.length > 0) {
-        setSelectedSeason(seasonsData.seasons[0].season_id);
+      if (uniqueSeasons.length > 0) {
+        setSelectedSeason(uniqueSeasons[0].season_id);
         setFormData((prev) => ({
           ...prev,
-          season_id: seasonsData.seasons[0].season_id,
+          season_id: uniqueSeasons[0].season_id,
         }));
       }
     } catch (error) {
@@ -620,8 +631,8 @@ export default function ManageMatches() {
             }}
           >
             <option value="">Select Season</option>
-            {seasons.map((season) => (
-              <option key={season.season_id} value={season.season_id}>
+            {uniqueSeasonYears.map((season) => (
+              <option key={season.season_id} value={season.year}>
                 {season.year}
               </option>
             ))}
