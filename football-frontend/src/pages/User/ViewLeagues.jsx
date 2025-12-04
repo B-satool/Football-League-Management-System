@@ -12,6 +12,10 @@ export default function ViewLeagues() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("standings"); // standings, scorers, stats
 
+  const uniqueSeasonYears = [
+    ...new Map(seasons.map((s) => [s.year, s])).values(),
+  ];
+
   useEffect(() => {
     loadInitialData();
   }, []);
@@ -282,7 +286,7 @@ export default function ViewLeagues() {
               </label>
               <select
                 value={selectedSeason}
-                onChange={(e) => setSelectedSeason(parseInt(e.target.value))}
+                onChange={(e) => setSelectedSeason(e.target.value)}
                 style={{
                   padding: "8px 12px",
                   borderRadius: "4px",
@@ -291,8 +295,9 @@ export default function ViewLeagues() {
                   minWidth: "150px",
                 }}
               >
-                {seasons.map((season) => (
-                  <option key={season.season_id} value={season.season_id}>
+                <option value="">Select Season</option>
+                {uniqueSeasonYears.map((season) => (
+                  <option key={season.season_id} value={season.year}>
                     {season.year}
                   </option>
                 ))}
