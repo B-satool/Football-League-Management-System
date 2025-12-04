@@ -167,7 +167,7 @@ export default function ManageUsers() {
           {/* Filter and Search Section */}
           <div
             style={{
-              backgroundColor: "#f9fafb",
+              backgroundColor: "#757676ff",
               padding: "15px",
               borderRadius: "8px",
               marginBottom: "20px",
@@ -309,7 +309,7 @@ export default function ManageUsers() {
           >
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ backgroundColor: "#f3f4f6" }}>
+                <tr style={{ backgroundColor: "#69696aff" }}>
                   <th
                     style={{
                       padding: "12px",
@@ -370,7 +370,10 @@ export default function ManageUsers() {
                 {filteredUsers.map((user) => (
                   <tr
                     key={user.user_id}
-                    style={{ borderBottom: "1px solid #e5e7eb" }}
+                    style={{
+                      borderBottom: "1px solid #b4b4b5ff",
+                      backgroundColor: "#58585aff",
+                    }}
                   >
                     <td style={{ padding: "12px" }}>{user.user_id}</td>
                     <td style={{ padding: "12px", fontWeight: "bold" }}>
@@ -432,7 +435,7 @@ export default function ManageUsers() {
           {/* Info Banner */}
           <div
             style={{
-              backgroundColor: "#fef3c7",
+              backgroundColor: "#989897ff",
               border: "2px solid #f59e0b",
               padding: "15px",
               borderRadius: "8px",
@@ -454,7 +457,7 @@ export default function ManageUsers() {
           >
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ backgroundColor: "#f3f4f6" }}>
+                <tr style={{ backgroundColor: "#6b6b6cff" }}>
                   <th
                     style={{
                       padding: "12px",

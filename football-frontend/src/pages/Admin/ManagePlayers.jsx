@@ -468,7 +468,7 @@ export default function ManagePlayers() {
       {/* Filters Section */}
       <div
         style={{
-          backgroundColor: "#f9fafb",
+          backgroundColor: "#575758ff",
           padding: "15px",
           borderRadius: "8px",
           marginBottom: "20px",
@@ -664,7 +664,7 @@ export default function ManagePlayers() {
         >
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
-              <tr style={{ backgroundColor: "#f3f4f6" }}>
+              <tr style={{ backgroundColor: "#4b4c4cff" }}>
                 <th
                   style={{
                     padding: "12px",
@@ -743,7 +743,7 @@ export default function ManagePlayers() {
               {players.map((player) => (
                 <tr
                   key={player.player_id}
-                  style={{ borderBottom: "1px solid #e5e7eb" }}
+                  style={{ borderBottom: "1px solid #e5e7eb", backgroundColor: "#858585ff" }}
                 >
                   <td style={{ padding: "12px" }}>{player.player_id}</td>
                   <td style={{ padding: "12px", fontWeight: "bold" }}>

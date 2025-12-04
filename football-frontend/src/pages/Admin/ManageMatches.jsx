@@ -282,7 +282,7 @@ export default function ManageMatches() {
         <>
           <div
             style={{
-              backgroundColor: "#f3f4f6",
+              backgroundColor: "#7c7d7eff",
               padding: "20px",
               borderRadius: "8px",
               marginBottom: "30px",
@@ -546,7 +546,7 @@ export default function ManageMatches() {
       {activeTab === "score" && (
         <div
           style={{
-            backgroundColor: "#fef3c7",
+            backgroundColor: "#979694ff",
             padding: "15px",
             borderRadius: "8px",
             marginBottom: "20px",
@@ -561,7 +561,7 @@ export default function ManageMatches() {
       {/* Filter Section */}
       <div
         style={{
-          backgroundColor: "#f9fafb",
+          backgroundColor: "#7c7d7eff",
           padding: "15px",
           borderRadius: "8px",
           marginBottom: "20px",
@@ -639,7 +639,7 @@ export default function ManageMatches() {
           }}
         >
           <thead>
-            <tr style={{ backgroundColor: "#f3f4f6" }}>
+            <tr style={{ backgroundColor: "#7c7d7eff" }}>
               <th
                 style={{
                   padding: "12px",
@@ -709,7 +709,7 @@ export default function ManageMatches() {
             {matches.map((match) => (
               <tr
                 key={match.match_id}
-                style={{ borderBottom: "1px solid #e5e7eb" }}
+                style={{ borderBottom: "1px solid #ffffff" }}
               >
                 <td style={{ padding: "12px" }}>{match.matchday}</td>
                 <td style={{ padding: "12px" }}>
@@ -826,7 +826,7 @@ export default function ManageMatches() {
         >
           <div
             style={{
-              backgroundColor: "white",
+              backgroundColor: "grey",
               padding: "30px",
               borderRadius: "8px",
               maxWidth: "500px",

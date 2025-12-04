@@ -162,7 +162,7 @@ export default function ViewPlayers() {
 
       {/* Filters Section */}
       <div style={{
-        backgroundColor: '#f9fafb',
+        backgroundColor: '#4c4c4dff',
         padding: '20px',
         borderRadius: '8px',
         marginBottom: '20px',
