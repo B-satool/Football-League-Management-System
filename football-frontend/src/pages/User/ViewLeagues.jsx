@@ -12,8 +12,10 @@ export default function ViewLeagues() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("standings"); // standings, scorers, stats
 
+  const filteredSeasons = seasons.filter((s) => s.league_id === selectedLeague);
+
   const uniqueSeasonYears = [
-    ...new Map(seasons.map((s) => [s.year, s])).values(),
+    ...new Map(filteredSeasons.map((s) => [s.year, s])).values(),
   ];
 
   useEffect(() => {
@@ -42,11 +44,6 @@ export default function ViewLeagues() {
       // Set defaults
       if (leaguesData.leagues && leaguesData.leagues.length > 0) {
         setSelectedLeague(leaguesData.leagues[0].league_id);
-      }
-
-      if (seasonsData.seasons && seasonsData.seasons.length > 0) {
-        // Get the most recent season
-        setSelectedSeason(seasonsData.seasons[0].season_id);
       }
     } catch (error) {
       console.error("Error loading initial data:", error);
@@ -272,7 +269,7 @@ export default function ViewLeagues() {
           </div>
 
           {/* Season Selector */}
-          {seasons.length > 0 && (
+          {filteredSeasons.length > 0 && (
             <div>
               <label
                 style={{
@@ -297,7 +294,7 @@ export default function ViewLeagues() {
               >
                 <option value="">Select Season</option>
                 {uniqueSeasonYears.map((season) => (
-                  <option key={season.season_id} value={season.year}>
+                  <option key={season.season_id} value={season.season_id}>
                     {season.year}
                   </option>
                 ))}
