@@ -74,7 +74,7 @@ export default function Search() {
       {/* Search Form */}
       <form onSubmit={handleSearch} style={{ marginBottom: '30px' }}>
         <div style={{
-          backgroundColor: '#f9fafb',
+          backgroundColor: '#59595aff',
           padding: '20px',
           borderRadius: '8px',
           border: '2px solid #e5e7eb'

@@ -1,6 +1,8 @@
 /* Make all text black */
-body, html, * {
-  color: #000000 !important;  
+body,
+html,
+* {
+  color: #000000 !important;
 }
 
 :root {

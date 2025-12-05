@@ -11,6 +11,10 @@ export default function ManageMatches() {
   const [selectedLeague, setSelectedLeague] = useState("");
   const [selectedSeason, setSelectedSeason] = useState("");
 
+  const uniqueSeasonYears = [
+    ...new Map(seasons.map((s) => [s.year, s])).values(),
+  ];
+
   const [formData, setFormData] = useState({
     season_id: "",
     league_id: "",
@@ -57,14 +61,21 @@ export default function ManageMatches() {
       ]);
 
       setLeagues(leaguesData.leagues || []);
-      setSeasons(seasonsData.seasons || []);
+
+      const seasonsList = seasonsData.seasons || [];
+
+      const uniqueSeasons = [
+        ...new Map(seasonsList.map((s) => [s.year, s])).values(),
+      ];
+
+      setSeasons(uniqueSeasons);
 
       // Set default season to latest
-      if (seasonsData.seasons && seasonsData.seasons.length > 0) {
-        setSelectedSeason(seasonsData.seasons[0].season_id);
+      if (uniqueSeasons.length > 0) {
+        setSelectedSeason(uniqueSeasons[0].season_id);
         setFormData((prev) => ({
           ...prev,
-          season_id: seasonsData.seasons[0].season_id,
+          season_id: uniqueSeasons[0].season_id,
         }));
       }
     } catch (error) {
@@ -282,7 +293,7 @@ export default function ManageMatches() {
         <>
           <div
             style={{
-              backgroundColor: "#f3f4f6",
+              backgroundColor: "#7c7d7eff",
               padding: "20px",
               borderRadius: "8px",
               marginBottom: "30px",
@@ -546,7 +557,7 @@ export default function ManageMatches() {
       {activeTab === "score" && (
         <div
           style={{
-            backgroundColor: "#fef3c7",
+            backgroundColor: "#979694ff",
             padding: "15px",
             borderRadius: "8px",
             marginBottom: "20px",
@@ -561,7 +572,7 @@ export default function ManageMatches() {
       {/* Filter Section */}
       <div
         style={{
-          backgroundColor: "#f9fafb",
+          backgroundColor: "#7c7d7eff",
           padding: "15px",
           borderRadius: "8px",
           marginBottom: "20px",
@@ -620,8 +631,8 @@ export default function ManageMatches() {
             }}
           >
             <option value="">Select Season</option>
-            {seasons.map((season) => (
-              <option key={season.season_id} value={season.season_id}>
+            {uniqueSeasonYears.map((season) => (
+              <option key={season.season_id} value={season.year}>
                 {season.year}
               </option>
             ))}
@@ -639,7 +650,7 @@ export default function ManageMatches() {
           }}
         >
           <thead>
-            <tr style={{ backgroundColor: "#f3f4f6" }}>
+            <tr style={{ backgroundColor: "#7c7d7eff" }}>
               <th
                 style={{
                   padding: "12px",
@@ -709,7 +720,7 @@ export default function ManageMatches() {
             {matches.map((match) => (
               <tr
                 key={match.match_id}
-                style={{ borderBottom: "1px solid #e5e7eb" }}
+                style={{ borderBottom: "1px solid #ffffff" }}
               >
                 <td style={{ padding: "12px" }}>{match.matchday}</td>
                 <td style={{ padding: "12px" }}>
@@ -826,7 +837,7 @@ export default function ManageMatches() {
         >
           <div
             style={{
-              backgroundColor: "white",
+              backgroundColor: "grey",
               padding: "30px",
               borderRadius: "8px",
               maxWidth: "500px",

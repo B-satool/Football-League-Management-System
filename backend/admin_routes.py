@@ -43,9 +43,9 @@ def get_users():
     cursor = conn.cursor(dictionary=True)
     try:
         cursor.execute("""
-            SELECT user_id, username, email, is_admin, created_at 
+            SELECT user_id, username, email, is_admin 
             FROM users 
-            ORDER BY created_at DESC
+            ORDER BY user_id DESC
         """)
         users = cursor.fetchall()
         return jsonify({'users': users}), 200

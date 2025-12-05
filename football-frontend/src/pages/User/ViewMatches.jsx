@@ -121,7 +121,7 @@ export default function ViewMatches() {
 
       {/* Filters */}
       <div style={{
-        backgroundColor: '#f9fafb',
+        backgroundColor: '#616262ff',
         padding: '20px',
         borderRadius: '8px',
         marginBottom: '20px',
