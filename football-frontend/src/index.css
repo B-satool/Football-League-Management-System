@@ -1,8 +1,8 @@
-/* Make all text black 
+/* Make all text black */
 body, html, * {
-  color: #000000 !important;  /* Forces black color 
+  color: #000000 !important;  
 }
-*/
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
