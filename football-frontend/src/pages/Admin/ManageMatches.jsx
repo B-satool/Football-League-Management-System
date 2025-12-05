@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { matchService } from "../../services/match.service";
 import { adminService } from "../../services/admin.service";
 import { teamService } from "../../services/team.service";
+import "../../css/ManageMatches.css";
 
 export default function ManageMatches() {
   const [matches, setMatches] = useState([]);
@@ -35,7 +36,7 @@ export default function ManageMatches() {
   const [editingId, setEditingId] = useState(null);
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("schedule"); // 'schedule' or 'score'
+  const [activeTab, setActiveTab] = useState("schedule");
 
   useEffect(() => {
     loadReferenceData();
@@ -70,7 +71,6 @@ export default function ManageMatches() {
 
       setSeasons(uniqueSeasons);
 
-      // Set default season to latest
       if (uniqueSeasons.length > 0) {
         setSelectedSeason(uniqueSeasons[0].season_id);
         setFormData((prev) => ({
@@ -177,7 +177,7 @@ export default function ManageMatches() {
       matchday: match.matchday,
       home_team_id: match.home_team_id,
       away_team_id: match.away_team_id,
-      utc_date: match.utc_date.split("T")[0], // Format date for input
+      utc_date: match.utc_date.split("T")[0],
     });
     setEditingId(match.match_id);
     setSelectedLeague(match.league_id);
@@ -230,59 +230,25 @@ export default function ManageMatches() {
   };
 
   const getMatchStatusBadge = (status) => {
-    const colors = {
-      UPCOMING: "#3b82f6",
-      TODAY: "#f59e0b",
-      COMPLETED: "#10b981",
-    };
-    return (
-      <span
-        style={{
-          padding: "4px 8px",
-          borderRadius: "4px",
-          backgroundColor: colors[status] || "#6b7280",
-          color: "white",
-          fontSize: "12px",
-          fontWeight: "bold",
-        }}
-      >
-        {status}
-      </span>
-    );
+    const statusClass = `status-badge status-${status.toLowerCase()}`;
+    return <span className={statusClass}>{status}</span>;
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="manage-matches-container">
       <h1>Manage Matches</h1>
 
       {/* Tabs */}
-      <div style={{ marginBottom: "20px", borderBottom: "2px solid #e5e7eb" }}>
+      <div className="tabs-container">
         <button
+          className={`schedule-update-btn ${activeTab === "schedule" ? "active" : ""}`}
           onClick={() => setActiveTab("schedule")}
-          style={{
-            padding: "10px 20px",
-            border: "none",
-            background: activeTab === "schedule" ? "#3b82f6" : "transparent",
-            color: activeTab === "schedule" ? "white" : "#374151",
-            cursor: "pointer",
-            fontWeight: "bold",
-            borderBottom:
-              activeTab === "schedule" ? "3px solid #2563eb" : "none",
-          }}
         >
           Schedule Matches
         </button>
         <button
+          className={`schedule-update-btn ${activeTab === "score" ? "active" : ""}`}
           onClick={() => setActiveTab("score")}
-          style={{
-            padding: "10px 20px",
-            border: "none",
-            background: activeTab === "score" ? "#3b82f6" : "transparent",
-            color: activeTab === "score" ? "white" : "#374151",
-            cursor: "pointer",
-            fontWeight: "bold",
-            borderBottom: activeTab === "score" ? "3px solid #2563eb" : "none",
-          }}
         >
           Update Scores
         </button>
@@ -291,49 +257,20 @@ export default function ManageMatches() {
       {/* Schedule Tab */}
       {activeTab === "schedule" && (
         <>
-          <div
-            style={{
-              backgroundColor: "#7c7d7eff",
-              padding: "20px",
-              borderRadius: "8px",
-              marginBottom: "30px",
-            }}
-          >
+          <div className="card-container">
             <h2>{editingId ? "Edit Match" : "Schedule New Match"}</h2>
-            <form
-              onSubmit={handleSubmit}
-              style={{ display: "grid", gap: "15px" }}
-            >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "15px",
-                }}
-              >
+            <form onSubmit={handleSubmit} className="form-container">
+              <div className="grid-2cols">
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: "5px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Season *
-                  </label>
+                  <label className="form-label">Season *</label>
                   <select
+                    className="form-select"
                     value={formData.season_id}
                     onChange={(e) => {
                       setFormData({ ...formData, season_id: e.target.value });
                       setSelectedSeason(e.target.value);
                     }}
                     required
-                    style={{
-                      width: "100%",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      border: "1px solid #d1d5db",
-                    }}
                   >
                     <option value="">Select Season</option>
                     {seasons.map((season) => (
@@ -345,25 +282,12 @@ export default function ManageMatches() {
                 </div>
 
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: "5px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    League *
-                  </label>
+                  <label className="form-label">League *</label>
                   <select
+                    className="form-select"
                     value={formData.league_id}
                     onChange={(e) => handleLeagueChange(e.target.value)}
                     required
-                    style={{
-                      width: "100%",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      border: "1px solid #d1d5db",
-                    }}
                   >
                     <option value="">Select League</option>
                     {leagues.map((league) => (
@@ -375,24 +299,11 @@ export default function ManageMatches() {
                 </div>
               </div>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr 1fr",
-                  gap: "15px",
-                }}
-              >
+              <div className="grid-3cols">
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: "5px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Matchday *
-                  </label>
+                  <label className="form-label">Matchday *</label>
                   <input
+                    className="form-input"
                     type="number"
                     min="1"
                     value={formData.matchday}
@@ -401,38 +312,19 @@ export default function ManageMatches() {
                     }
                     required
                     placeholder="e.g., 1"
-                    style={{
-                      width: "100%",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      border: "1px solid #d1d5db",
-                    }}
                   />
                 </div>
 
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: "5px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Home Team *
-                  </label>
+                  <label className="form-label">Home Team *</label>
                   <select
+                    className="form-select"
                     value={formData.home_team_id}
                     onChange={(e) =>
                       setFormData({ ...formData, home_team_id: e.target.value })
                     }
                     required
                     disabled={!formData.league_id}
-                    style={{
-                      width: "100%",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      border: "1px solid #d1d5db",
-                    }}
                   >
                     <option value="">Select Home Team</option>
                     {teams.map((team) => (
@@ -444,28 +336,15 @@ export default function ManageMatches() {
                 </div>
 
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: "5px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Away Team *
-                  </label>
+                  <label className="form-label">Away Team *</label>
                   <select
+                    className="form-select"
                     value={formData.away_team_id}
                     onChange={(e) =>
                       setFormData({ ...formData, away_team_id: e.target.value })
                     }
                     required
                     disabled={!formData.league_id}
-                    style={{
-                      width: "100%",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      border: "1px solid #d1d5db",
-                    }}
                   >
                     <option value="">Select Away Team</option>
                     {teams.map((team) => (
@@ -484,44 +363,23 @@ export default function ManageMatches() {
               </div>
 
               <div>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "5px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Match Date *
-                </label>
+                <label className="form-label">Match Date *</label>
                 <input
+                  className="form-input"
                   type="date"
                   value={formData.utc_date}
                   onChange={(e) =>
                     setFormData({ ...formData, utc_date: e.target.value })
                   }
                   required
-                  style={{
-                    width: "100%",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    border: "1px solid #d1d5db",
-                  }}
                 />
               </div>
 
-              <div style={{ display: "flex", gap: "10px" }}>
+              <div className="form-actions">
                 <button
                   type="submit"
                   disabled={loading}
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "#3b82f6",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: loading ? "not-allowed" : "pointer",
-                    fontWeight: "bold",
-                  }}
+                  className="btn-primary"
                 >
                   {loading
                     ? "Saving..."
@@ -534,15 +392,7 @@ export default function ManageMatches() {
                   <button
                     type="button"
                     onClick={resetForm}
-                    style={{
-                      padding: "10px 20px",
-                      backgroundColor: "#6b7280",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                    }}
+                    className="btn-secondary"
                   >
                     Cancel
                   </button>
@@ -555,51 +405,20 @@ export default function ManageMatches() {
 
       {/* Score Tab */}
       {activeTab === "score" && (
-        <div
-          style={{
-            backgroundColor: "#979694ff",
-            padding: "15px",
-            borderRadius: "8px",
-            marginBottom: "20px",
-            border: "2px solid #fbbf24",
-          }}
-        >
+        <div className="tip-box">
           <strong>💡 Tip:</strong> Click "Add Score" button on any match below
           to update its score. Standings will be automatically recalculated!
         </div>
       )}
 
       {/* Filter Section */}
-      <div
-        style={{
-          backgroundColor: "#7c7d7eff",
-          padding: "15px",
-          borderRadius: "8px",
-          marginBottom: "20px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "15px",
-        }}
-      >
+      <div className="filter-container">
         <div>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-            }}
-          >
-            Filter by League
-          </label>
+          <label className="form-label">Filter by League</label>
           <select
+            className="form-select"
             value={selectedLeague}
             onChange={(e) => setSelectedLeague(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px",
-              borderRadius: "4px",
-              border: "1px solid #d1d5db",
-            }}
           >
             <option value="">Select League</option>
             {leagues.map((league) => (
@@ -611,24 +430,11 @@ export default function ManageMatches() {
         </div>
 
         <div>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-            }}
-          >
-            Filter by Season
-          </label>
+          <label className="form-label">Filter by Season</label>
           <select
+            className="form-select"
             value={selectedSeason}
             onChange={(e) => setSelectedSeason(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px",
-              borderRadius: "4px",
-              border: "1px solid #d1d5db",
-            }}
           >
             <option value="">Select Season</option>
             {uniqueSeasonYears.map((season) => (
@@ -641,132 +447,42 @@ export default function ManageMatches() {
       </div>
 
       {/* Matches Table */}
-      <div style={{ overflowX: "auto" }}>
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            backgroundColor: "white",
-          }}
-        >
+      <div className="table-container">
+        <table className="matches-table">
           <thead>
-            <tr style={{ backgroundColor: "#7c7d7eff" }}>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Matchday
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Date
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Home Team
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "center",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Score
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Away Team
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "center",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Status
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "center",
-                  borderBottom: "2px solid #e5e7eb",
-                }}
-              >
-                Actions
-              </th>
+            <tr>
+              <th>Matchday</th>
+              <th>Date</th>
+              <th>Home Team</th>
+              <th className="center">Score</th>
+              <th>Away Team</th>
+              <th className="center">Status</th>
+              <th className="center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {matches.map((match) => (
-              <tr
-                key={match.match_id}
-                style={{ borderBottom: "1px solid #ffffff" }}
-              >
-                <td style={{ padding: "12px" }}>{match.matchday}</td>
-                <td style={{ padding: "12px" }}>
+              <tr key={match.match_id}>
+                <td>{match.matchday}</td>
+                <td>
                   {new Date(match.utc_date).toLocaleDateString()}
                 </td>
-                <td style={{ padding: "12px", fontWeight: "bold" }}>
-                  {match.home_team}
-                </td>
-                <td
-                  style={{
-                    padding: "12px",
-                    textAlign: "center",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                  }}
-                >
+                <td className="bold">{match.home_team}</td>
+                <td className="center score-cell">
                   {match.full_time_home !== null &&
                   match.full_time_away !== null
                     ? `${match.full_time_home} - ${match.full_time_away}`
                     : "-"}
                 </td>
-                <td style={{ padding: "12px", fontWeight: "bold" }}>
-                  {match.away_team}
-                </td>
-                <td style={{ padding: "12px", textAlign: "center" }}>
+                <td className="bold">{match.away_team}</td>
+                <td className="center">
                   {getMatchStatusBadge(match.match_status)}
                 </td>
-                <td style={{ padding: "12px", textAlign: "center" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "5px",
-                      justifyContent: "center",
-                    }}
-                  >
+                <td className="center">
+                  <div className="actions-cell">
                     <button
                       onClick={() => openScoreModal(match)}
-                      style={{
-                        padding: "6px 12px",
-                        backgroundColor: "#10b981",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        fontSize: "12px",
-                      }}
+                      className="btn-add-score"
                     >
                       {match.full_time_home !== null
                         ? "Edit Score"
@@ -774,29 +490,13 @@ export default function ManageMatches() {
                     </button>
                     <button
                       onClick={() => handleEdit(match)}
-                      style={{
-                        padding: "6px 12px",
-                        backgroundColor: "#3b82f6",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        fontSize: "12px",
-                      }}
+                      className="btn-edit"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(match.match_id)}
-                      style={{
-                        padding: "6px 12px",
-                        backgroundColor: "#ef4444",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        fontSize: "12px",
-                      }}
+                      className="btn-delete"
                     >
                       Delete
                     </button>
@@ -808,9 +508,7 @@ export default function ManageMatches() {
         </table>
 
         {matches.length === 0 && (
-          <div
-            style={{ textAlign: "center", padding: "40px", color: "#6b7280" }}
-          >
+          <div className="empty-state">
             <p>
               No matches found. Select a league and season, or schedule a new
               match.
@@ -821,51 +519,17 @@ export default function ManageMatches() {
 
       {/* Score Modal */}
       {showScoreModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "grey",
-              padding: "30px",
-              borderRadius: "8px",
-              maxWidth: "500px",
-              width: "100%",
-            }}
-          >
+        <div className="modal-overlay">
+          <div className="modal-content">
             <h2>Update Match Score</h2>
             <form onSubmit={handleScoreSubmit}>
-              <div style={{ marginBottom: "20px" }}>
+              <div className="score-section">
                 <h3>Full Time Score</h3>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "15px",
-                  }}
-                >
+                <div className="grid-2cols">
                   <div>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "5px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Home Goals *
-                    </label>
+                    <label className="form-label">Home Goals *</label>
                     <input
+                      className="form-input"
                       type="number"
                       min="0"
                       value={scoreData.full_time_home}
@@ -876,25 +540,12 @@ export default function ManageMatches() {
                         })
                       }
                       required
-                      style={{
-                        width: "100%",
-                        padding: "8px",
-                        borderRadius: "4px",
-                        border: "1px solid #d1d5db",
-                      }}
                     />
                   </div>
                   <div>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "5px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Away Goals *
-                    </label>
+                    <label className="form-label">Away Goals *</label>
                     <input
+                      className="form-input"
                       type="number"
                       min="0"
                       value={scoreData.full_time_away}
@@ -905,37 +556,18 @@ export default function ManageMatches() {
                         })
                       }
                       required
-                      style={{
-                        width: "100%",
-                        padding: "8px",
-                        borderRadius: "4px",
-                        border: "1px solid #d1d5db",
-                      }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginBottom: "20px" }}>
+              <div className="score-section">
                 <h3>Half Time Score (Optional)</h3>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "15px",
-                  }}
-                >
+                <div className="grid-2cols">
                   <div>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "5px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Home Goals
-                    </label>
+                    <label className="form-label">Home Goals</label>
                     <input
+                      className="form-input"
                       type="number"
                       min="0"
                       value={scoreData.half_time_home}
@@ -945,25 +577,12 @@ export default function ManageMatches() {
                           half_time_home: e.target.value,
                         })
                       }
-                      style={{
-                        width: "100%",
-                        padding: "8px",
-                        borderRadius: "4px",
-                        border: "1px solid #d1d5db",
-                      }}
                     />
                   </div>
                   <div>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "5px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Away Goals
-                    </label>
+                    <label className="form-label">Away Goals</label>
                     <input
+                      className="form-input"
                       type="number"
                       min="0"
                       value={scoreData.half_time_away}
@@ -973,53 +592,26 @@ export default function ManageMatches() {
                           half_time_away: e.target.value,
                         })
                       }
-                      style={{
-                        width: "100%",
-                        padding: "8px",
-                        borderRadius: "4px",
-                        border: "1px solid #d1d5db",
-                      }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  gap: "10px",
-                  justifyContent: "flex-end",
-                }}
-              >
+              <div className="modal-actions">
                 <button
                   type="button"
                   onClick={() => {
                     setShowScoreModal(false);
                     resetScoreForm();
                   }}
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "#6b7280",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                  }}
+                  className="btn-secondary"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "#10b981",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: loading ? "not-allowed" : "pointer",
-                    fontWeight: "bold",
-                  }}
+                  className="btn-success"
                 >
                   {loading ? "Updating..." : "Update Score"}
                 </button>

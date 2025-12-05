@@ -1,9 +1,3 @@
-/* Make all text black */
-body,
-html,
-* {
-  color: #000000 !important;
-}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

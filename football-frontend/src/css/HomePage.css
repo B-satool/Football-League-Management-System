@@ -1,0 +1,31 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  background: #7e7e7eff;
+}
+
+.button-group {
+  margin-top: 30px;
+}
+
+.home-btn {
+  padding: 10px 20px;
+  margin-right: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.home-btn:hover {
+  background: #555;
+  transform: scale(1.05);
+}
