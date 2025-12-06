@@ -216,7 +216,9 @@ export default function ViewLeagues() {
                 "🏆"
               )}
             </div>
-            <h3 style={{ margin: "0 0 5px 0", fontSize: "16px", color: "#333" }}>
+            <h3
+              style={{ margin: "0 0 5px 0", fontSize: "16px", color: "#333" }}
+            >
               {league.name}
             </h3>
             <p style={{ margin: 0, fontSize: "12px", color: "#6b7280" }}>
@@ -366,7 +368,7 @@ export default function ViewLeagues() {
         >
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
-              <tr style={{ backgroundColor: "#f3f4f6", color: "#333"}}>
+              <tr style={{ backgroundColor: "#f3f4f6", color: "#333" }}>
                 <th
                   style={{
                     padding: "12px",
@@ -484,6 +486,7 @@ export default function ViewLeagues() {
                   key={team.team_id}
                   style={{
                     borderBottom: "1px solid #e5e7eb",
+                    color: "#333",
                     ...getPositionStyle(team.position),
                   }}
                 >
@@ -604,7 +607,7 @@ export default function ViewLeagues() {
             overflowX: "auto",
             backgroundColor: "white",
             borderRadius: "8px",
-            color: "#333"
+            color: "#333",
           }}
         >
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -756,7 +759,7 @@ export default function ViewLeagues() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
             gap: "20px",
-            color: "#333"
+            color: "#333",
           }}
         >
           <div

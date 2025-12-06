@@ -281,7 +281,8 @@ export default function ManageMatches() {
             color: activeTab === "score" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "score" ? "3px solid #516082ff" : "none",
+            borderBottom:
+              activeTab === "score" ? "3px solid #516082ff" : "none",
           }}
         >
           Update Scores
@@ -510,7 +511,8 @@ export default function ManageMatches() {
               </div>
 
               <div style={{ display: "flex", gap: "10px" }}>
-                <button className="button-submit"
+                <button
+                  className="button-submit"
                   type="submit"
                   disabled={loading}
                 >
@@ -729,10 +731,10 @@ export default function ManageMatches() {
                     fontWeight: "bold",
                   }}
                 >
-                  {match.full_time_home !== null && match.full_time_away !== null
+                  {match.full_time_home !== null &&
+                  match.full_time_away !== null
                     ? `${match.full_time_home} - ${match.full_time_away}`
                     : "-"}
-
                 </td>
                 <td style={{ padding: "12px", fontWeight: "bold" }}>
                   {match.away_team}
