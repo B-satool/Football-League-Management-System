@@ -29,3 +29,21 @@
   background: #555;
   transform: scale(1.05);
 }
+
+.button-submit {
+  padding: 10px 20px;
+  background-color: rgb(16, 185, 129);
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.button-submit:hover {
+  background-color: rgb(16, 185, 129);
+  color: white;
+  transform: scale(1.05);
+  transition: all 0.2s ease; 
+}

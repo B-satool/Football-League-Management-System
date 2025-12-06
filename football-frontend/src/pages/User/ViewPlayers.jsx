@@ -354,7 +354,8 @@ export default function ViewPlayers() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: '20px'
+          gap: '20px',
+          color: "#333"
         }}>
           {filteredPlayers.map(player => (
             <div
@@ -457,7 +458,7 @@ export default function ViewPlayers() {
 
       {/* List View */}
       {!loading && viewMode === 'list' && (
-        <div style={{ overflowX: 'auto', backgroundColor: 'white', borderRadius: '8px' }}>
+        <div style={{ overflowX: 'auto', backgroundColor: 'white', borderRadius: '8px', color: "#333" }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ backgroundColor: '#f3f4f6' }}>

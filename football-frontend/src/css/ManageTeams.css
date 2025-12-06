@@ -1,0 +1,227 @@
+/* Main Container */
+.manage-teams-container {
+  padding: 20px;
+}
+
+/* Header Section */
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Form Section */
+.teams-form-container {
+  background-color: #7e7e7eff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 2px solid #e5e7eb;
+}
+
+.teams-form {
+  display: grid;
+  gap: 15px;
+}
+
+.teams-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.teams-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.teams-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.teams-form-input,
+.teams-form-select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.teams-form-input:focus,
+.teams-form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.teams-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Buttons */
+.btn-add-team {
+  padding: 10px 20px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-add-team:hover {
+  background-color: #059669;
+}
+
+.btn-submit {
+  padding: 10px 20px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #059669;
+}
+
+.btn-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-cancel {
+  padding: 10px 20px;
+  background-color: rgb(239, 68, 68);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-edit-team {
+  padding: 6px 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.btn-edit-team:hover {
+  background-color: #2563eb;
+}
+
+.btn-delete-team {
+  padding: 6px 12px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.btn-delete-team:hover {
+  background-color: #dc2626;
+}
+
+/* Table Section */
+.teams-table-container {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.teams-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.teams-table thead tr {
+  background-color: #7e7e7eff;
+}
+
+.teams-table th {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #e5e7eb;
+  font-weight: bold;
+}
+
+.teams-table th.center {
+  text-align: center;
+}
+
+.teams-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  transition: background-color 0.2s;
+}
+
+.teams-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.teams-table td {
+  padding: 12px;
+  color: #333;
+}
+
+.teams-table td.bold {
+  font-weight: bold;
+}
+
+.teams-table td.center {
+  text-align: center;
+}
+
+/* Team Actions */
+.team-actions {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+/* Empty State */
+.teams-empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+/* Crest Preview */
+.team-crest-preview {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Total Count */
+.teams-count {
+  margin-top: 15px;
+  text-align: right;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Loading State */
+.teams-loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}

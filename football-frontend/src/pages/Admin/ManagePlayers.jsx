@@ -253,7 +253,7 @@ export default function ManagePlayers() {
       {showForm && (
         <div
           style={{
-            backgroundColor: "#f3f4f6",
+            backgroundColor: "#7e7e7eff",
             padding: "20px",
             borderRadius: "8px",
             marginBottom: "30px",
@@ -428,7 +428,7 @@ export default function ManagePlayers() {
                 disabled={loading}
                 style={{
                   padding: "10px 20px",
-                  backgroundColor: "#3b82f6",
+                  backgroundColor: "rgb(16, 185, 129)",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -451,7 +451,7 @@ export default function ManagePlayers() {
                 }}
                 style={{
                   padding: "10px 20px",
-                  backgroundColor: "#6b7280",
+                  backgroundColor: "rgb(239, 68, 68)",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -468,7 +468,7 @@ export default function ManagePlayers() {
       {/* Filters Section */}
       <div
         style={{
-          backgroundColor: "#575758ff",
+          backgroundColor: "#7e7e7eff",
           padding: "15px",
           borderRadius: "8px",
           marginBottom: "20px",
@@ -662,9 +662,9 @@ export default function ManagePlayers() {
             borderRadius: "8px",
           }}
         >
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse"}}>
             <thead>
-              <tr style={{ backgroundColor: "#4b4c4cff" }}>
+              <tr style={{ backgroundColor: "#7e7e7eff" }}>
                 <th
                   style={{
                     padding: "12px",
@@ -739,11 +739,11 @@ export default function ManagePlayers() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {players.map((player) => (
                 <tr
                   key={player.player_id}
-                  style={{ borderBottom: "1px solid #e5e7eb", backgroundColor: "#858585ff" }}
+                  style={{ borderBottom: "1px solid #e5e7eb", backgroundColor: "#ffffffff", color: "#333" }}
                 >
                   <td style={{ padding: "12px" }}>{player.player_id}</td>
                   <td style={{ padding: "12px", fontWeight: "bold" }}>
@@ -776,7 +776,7 @@ export default function ManagePlayers() {
                         onClick={() => handleEdit(player)}
                         style={{
                           padding: "6px 12px",
-                          backgroundColor: "#3b82f6",
+                          backgroundColor: "rgb(59, 130, 246)",
                           color: "white",
                           border: "none",
                           borderRadius: "4px",
@@ -790,7 +790,7 @@ export default function ManagePlayers() {
                         onClick={() => handleDelete(player.player_id)}
                         style={{
                           padding: "6px 12px",
-                          backgroundColor: "#ef4444",
+                          backgroundColor: "rgb(239, 68, 68)",
                           color: "white",
                           border: "none",
                           borderRadius: "4px",

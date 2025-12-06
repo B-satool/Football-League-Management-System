@@ -51,7 +51,7 @@ export default function ViewTeams() {
       <h1>Teams</h1>
 
       {/* League Filter */}
-      <select
+      <select style={{marginBottom: "20px", padding: "5px 10px"}}
         value={selectedLeague}
         onChange={(e) => setSelectedLeague(e.target.value)}
       >
@@ -67,14 +67,14 @@ export default function ViewTeams() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+          gridTemplateColumns: "repeat(2, 1fr)",
           gap: "20px",
         }}
       >
         {teams.map((team) => (
           <div
             key={team.team_id}
-            style={{ border: "1px solid #ddd", padding: "15px" }}
+            style={{ border: "1px solid #ddd", padding: "15px", backgroundColor: "#565555ff" }}
           >
             {team.cresturl && (
               <img

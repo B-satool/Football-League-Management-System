@@ -148,6 +148,7 @@ export default function Search() {
       {hasSearched && !loading && (
         <div style={{
           backgroundColor: '#dbeafe',
+          color: "#333",
           padding: '15px',
           borderRadius: '8px',
           marginBottom: '20px',
@@ -279,6 +280,7 @@ export default function Search() {
                 key={team.team_id}
                 style={{
                   backgroundColor: 'white',
+                  color: "#333",
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
                   padding: '15px',
@@ -354,6 +356,7 @@ export default function Search() {
                 key={stadium.stadium_id}
                 style={{
                   backgroundColor: 'white',
+                  color: "#333",
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
                   padding: '15px',
@@ -408,6 +411,7 @@ export default function Search() {
                 key={coach.coach_id}
                 style={{
                   backgroundColor: 'white',
+                  color: "#333",
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
                   padding: '15px',

@@ -216,7 +216,7 @@ export default function ViewLeagues() {
                 "🏆"
               )}
             </div>
-            <h3 style={{ margin: "0 0 5px 0", fontSize: "16px" }}>
+            <h3 style={{ margin: "0 0 5px 0", fontSize: "16px", color: "#333" }}>
               {league.name}
             </h3>
             <p style={{ margin: 0, fontSize: "12px", color: "#6b7280" }}>
@@ -230,7 +230,8 @@ export default function ViewLeagues() {
       {currentLeague && (
         <div
           style={{
-            backgroundColor: "#f3f4f6",
+            backgroundColor: "#ffffffff",
+            color: "#333",
             padding: "20px",
             borderRadius: "8px",
             marginBottom: "20px",
@@ -256,12 +257,12 @@ export default function ViewLeagues() {
                   style={{
                     fontSize: "24px",
                     fontWeight: "bold",
-                    color: "#3b82f6",
+                    color: "rgb(37, 99, 235)",
                   }}
                 >
                   {leagueStats.total_matches.total_matches || 0}
                 </div>
-                <div style={{ fontSize: "12px", color: "#6b7280" }}>
+                <div style={{ fontSize: "12px", color: "#333" }}>
                   Matches Played
                 </div>
               </div>
@@ -311,12 +312,10 @@ export default function ViewLeagues() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "standings" ? "#3b82f6" : "transparent",
-            color: activeTab === "standings" ? "white" : "#374151",
+            background: activeTab === "standings" ? "#516082ff" : "transparent",
+            color: activeTab === "standings" ? "white" : "#516082ff",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom:
-              activeTab === "standings" ? "3px solid #2563eb" : "none",
           }}
         >
           📊 Standings
@@ -326,12 +325,10 @@ export default function ViewLeagues() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "scorers" ? "#3b82f6" : "transparent",
-            color: activeTab === "scorers" ? "white" : "#374151",
+            background: activeTab === "scorers" ? "#516082ff" : "transparent",
+            color: activeTab === "scorers" ? "white" : "#516082ff",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom:
-              activeTab === "scorers" ? "3px solid #2563eb" : "none",
           }}
         >
           ⚽ Top Scorers
@@ -341,11 +338,10 @@ export default function ViewLeagues() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "stats" ? "#3b82f6" : "transparent",
-            color: activeTab === "stats" ? "white" : "#374151",
+            background: activeTab === "stats" ? "#516082ff" : "transparent",
+            color: activeTab === "stats" ? "white" : "#516082ff",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "stats" ? "3px solid #2563eb" : "none",
           }}
         >
           📈 Statistics
@@ -370,7 +366,7 @@ export default function ViewLeagues() {
         >
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
-              <tr style={{ backgroundColor: "#f3f4f6" }}>
+              <tr style={{ backgroundColor: "#f3f4f6", color: "#333"}}>
                 <th
                   style={{
                     padding: "12px",
@@ -608,6 +604,7 @@ export default function ViewLeagues() {
             overflowX: "auto",
             backgroundColor: "white",
             borderRadius: "8px",
+            color: "#333"
           }}
         >
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -759,6 +756,7 @@ export default function ViewLeagues() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
             gap: "20px",
+            color: "#333"
           }}
         >
           <div

@@ -121,11 +121,11 @@ export default function ManageUsers() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "users" ? "#3b82f6" : "transparent",
+            background: activeTab === "users" ? "#516082ff" : "transparent",
             color: activeTab === "users" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "users" ? "3px solid #2563eb" : "none",
+            borderBottom: activeTab === "users" ? "3px solid #516082ff" : "none",
           }}
         >
           Users ({users.length})
@@ -135,11 +135,11 @@ export default function ManageUsers() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "audit" ? "#3b82f6" : "transparent",
+            background: activeTab === "audit" ? "#516082ff" : "transparent",
             color: activeTab === "audit" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "audit" ? "3px solid #2563eb" : "none",
+            borderBottom: activeTab === "audit" ? "3px solid #516082ff" : "none",
           }}
         >
           Audit Log ({auditLogs.length})
@@ -153,6 +153,7 @@ export default function ManageUsers() {
           <div
             style={{
               backgroundColor: "#dbeafe",
+              color: "#333",
               border: "2px solid #3b82f6",
               padding: "15px",
               borderRadius: "8px",
@@ -372,7 +373,8 @@ export default function ManageUsers() {
                     key={user.user_id}
                     style={{
                       borderBottom: "1px solid #b4b4b5ff",
-                      backgroundColor: "#58585aff",
+                      backgroundColor: "#ffffffff",
+                      color: "#333"
                     }}
                   >
                     <td style={{ padding: "12px" }}>{user.user_id}</td>
