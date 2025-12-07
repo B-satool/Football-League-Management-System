@@ -125,7 +125,8 @@ export default function ManageUsers() {
             color: activeTab === "users" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "users" ? "3px solid #516082ff" : "none",
+            borderBottom:
+              activeTab === "users" ? "3px solid #516082ff" : "none",
           }}
         >
           Users ({users.length})
@@ -139,7 +140,8 @@ export default function ManageUsers() {
             color: activeTab === "audit" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom: activeTab === "audit" ? "3px solid #516082ff" : "none",
+            borderBottom:
+              activeTab === "audit" ? "3px solid #516082ff" : "none",
           }}
         >
           Audit Log ({auditLogs.length})
@@ -354,15 +356,6 @@ export default function ManageUsers() {
                       borderBottom: "2px solid #e5e7eb",
                     }}
                   >
-                    Registered
-                  </th>
-                  <th
-                    style={{
-                      padding: "12px",
-                      textAlign: "center",
-                      borderBottom: "2px solid #e5e7eb",
-                    }}
-                  >
                     Actions
                   </th>
                 </tr>
@@ -374,7 +367,7 @@ export default function ManageUsers() {
                     style={{
                       borderBottom: "1px solid #b4b4b5ff",
                       backgroundColor: "#ffffffff",
-                      color: "#333"
+                      color: "#333",
                     }}
                   >
                     <td style={{ padding: "12px" }}>{user.user_id}</td>
@@ -385,9 +378,7 @@ export default function ManageUsers() {
                     <td style={{ padding: "12px", textAlign: "center" }}>
                       {getUserBadge(user.is_admin)}
                     </td>
-                    <td style={{ padding: "12px" }}>
-                      {new Date(user.created_at).toLocaleDateString()}
-                    </td>
+
                     <td style={{ padding: "12px", textAlign: "center" }}>
                       <button
                         onClick={() =>
@@ -504,19 +495,33 @@ export default function ManageUsers() {
                     key={log.log_id}
                     style={{ borderBottom: "1px solid #e5e7eb" }}
                   >
-                    <td style={{ padding: "12px" }}>
+                    <td style={{ padding: "12px", color: "#333" }}>
                       {new Date(log.change_date).toLocaleString()}
                     </td>
-                    <td style={{ padding: "12px", fontWeight: "bold" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        fontWeight: "bold",
+                        color: "#333",
+                      }}
+                    >
                       {log.username || `User #${log.user_id}`}
                     </td>
-                    <td style={{ padding: "12px", textAlign: "center" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        textAlign: "center",
+                        color: "#333",
+                      }}
+                    >
                       {getActionBadge(
                         log.old_admin_status,
                         log.new_admin_status
                       )}
                     </td>
-                    <td style={{ padding: "12px" }}>{log.changed_by}</td>
+                    <td style={{ padding: "12px", color: "#333" }}>
+                      {log.changed_by}
+                    </td>
                   </tr>
                 ))}
               </tbody>
