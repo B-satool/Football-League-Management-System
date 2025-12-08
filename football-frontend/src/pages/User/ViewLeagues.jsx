@@ -377,7 +377,7 @@ export default function ViewLeagues() {
                     width: "50px",
                   }}
                 >
-                  Pos
+                  Position
                 </th>
                 <th
                   style={{
@@ -396,7 +396,7 @@ export default function ViewLeagues() {
                     width: "60px",
                   }}
                 >
-                  MP
+                  Matches Played
                 </th>
                 <th
                   style={{
@@ -436,7 +436,7 @@ export default function ViewLeagues() {
                     width: "80px",
                   }}
                 >
-                  GF
+                  Goals For
                 </th>
                 <th
                   style={{
@@ -446,7 +446,7 @@ export default function ViewLeagues() {
                     width: "80px",
                   }}
                 >
-                  GA
+                  Goals Against
                 </th>
                 <th
                   style={{
@@ -456,7 +456,7 @@ export default function ViewLeagues() {
                     width: "80px",
                   }}
                 >
-                  GD
+                  Goals Difference
                 </th>
                 <th
                   style={{
@@ -466,7 +466,7 @@ export default function ViewLeagues() {
                     width: "80px",
                   }}
                 >
-                  Pts
+                  Points
                 </th>
                 <th
                   style={{
