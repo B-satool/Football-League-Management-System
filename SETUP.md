@@ -85,6 +85,11 @@ SHOW TABLES;
 SHOW PROCEDURE STATUS WHERE Db = 'dbsproject';
 ```
 
+Then uncomment code in Load_data.py and run the file to load data.
+
+❗**Note**: In Players table, in the position field entries with position 'Midfield', 'Defence' & 'Offence' should be changed to 'Midfielder', 'Defender' & 'Forward'
+Without this it will show count of the mentioned players as 0 and filtering through positions won't work.
+
 ## Step 2: Backend Setup
 
 ### 2.1 Navigate to Backend Directory
