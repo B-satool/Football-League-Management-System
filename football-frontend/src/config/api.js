@@ -1,6 +1,6 @@
 // API base URL - change this based on your environment
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5173";
-
+// might have to change to 5000 instead of 5173 if you run on your device
 export const API_ENDPOINTS = {
   // Admin endpoints
   ADMIN: {

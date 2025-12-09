@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { matchService } from "../../services/match.service";
 import { adminService } from "../../services/admin.service";
 import { teamService } from "../../services/team.service";
+import { leagueService } from "../../services/league.service";
 
 export default function ManageMatches() {
   const [matches, setMatches] = useState([]);
@@ -10,10 +11,6 @@ export default function ManageMatches() {
   const [teams, setTeams] = useState([]);
   const [selectedLeague, setSelectedLeague] = useState("");
   const [selectedSeason, setSelectedSeason] = useState("");
-
-  const uniqueSeasonYears = [
-    ...new Map(seasons.map((s) => [s.year, s])).values(),
-  ];
 
   const [formData, setFormData] = useState({
     season_id: "",
@@ -61,21 +58,14 @@ export default function ManageMatches() {
       ]);
 
       setLeagues(leaguesData.leagues || []);
-
-      const seasonsList = seasonsData.seasons || [];
-
-      const uniqueSeasons = [
-        ...new Map(seasonsList.map((s) => [s.year, s])).values(),
-      ];
-
-      setSeasons(uniqueSeasons);
+      setSeasons(seasonsData.seasons || []);
 
       // Set default season to latest
-      if (uniqueSeasons.length > 0) {
-        setSelectedSeason(uniqueSeasons[0].season_id);
+      if (seasonsData.seasons && seasonsData.seasons.length > 0) {
+        setSelectedSeason(seasonsData.seasons[0].season_id);
         setFormData((prev) => ({
           ...prev,
-          season_id: uniqueSeasons[0].season_id,
+          season_id: seasonsData.seasons[0].season_id,
         }));
       }
     } catch (error) {
@@ -137,7 +127,10 @@ export default function ManageMatches() {
       }
 
       resetForm();
-      loadMatches();
+      // Make sure to reload matches with current filters
+      if (selectedLeague && selectedSeason) {
+        await loadMatches();
+      }
     } catch (error) {
       alert("Error: " + error.message);
     } finally {
@@ -158,11 +151,15 @@ export default function ManageMatches() {
       });
 
       alert(
-        "Match score updated successfully! Standings will be automatically updated."
+        "Match score updated successfully! Standings have been automatically updated by triggers."
       );
       setShowScoreModal(false);
       resetScoreForm();
-      loadMatches();
+
+      // Reload matches to show updated scores
+      if (selectedLeague && selectedSeason) {
+        await loadMatches();
+      }
     } catch (error) {
       alert("Error updating score: " + error.message);
     } finally {
@@ -190,7 +187,11 @@ export default function ManageMatches() {
     try {
       await matchService.deleteMatch(matchId);
       alert("Match deleted successfully!");
-      loadMatches();
+
+      // Reload matches
+      if (selectedLeague && selectedSeason) {
+        await loadMatches();
+      }
     } catch (error) {
       alert("Error deleting match: " + error.message);
     }
@@ -262,12 +263,12 @@ export default function ManageMatches() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "schedule" ? "#516082ff" : "transparent",
+            background: activeTab === "schedule" ? "#3b82f6" : "transparent",
             color: activeTab === "schedule" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
             borderBottom:
-              activeTab === "schedule" ? "3px solid #516082ff" : "none",
+              activeTab === "schedule" ? "3px solid #2563eb" : "none",
           }}
         >
           Schedule Matches
@@ -277,12 +278,11 @@ export default function ManageMatches() {
           style={{
             padding: "10px 20px",
             border: "none",
-            background: activeTab === "score" ? "#516082ff" : "transparent",
+            background: activeTab === "score" ? "#3b82f6" : "transparent",
             color: activeTab === "score" ? "white" : "#374151",
             cursor: "pointer",
             fontWeight: "bold",
-            borderBottom:
-              activeTab === "score" ? "3px solid #516082ff" : "none",
+            borderBottom: activeTab === "score" ? "3px solid #2563eb" : "none",
           }}
         >
           Update Scores
@@ -294,7 +294,7 @@ export default function ManageMatches() {
         <>
           <div
             style={{
-              backgroundColor: "#7e7e7eff",
+              backgroundColor: "#f3f4f6",
               padding: "20px",
               borderRadius: "8px",
               marginBottom: "30px",
@@ -512,9 +512,17 @@ export default function ManageMatches() {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <button
-                  className="button-submit"
                   type="submit"
                   disabled={loading}
+                  style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#3b82f6",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: loading ? "not-allowed" : "pointer",
+                    fontWeight: "bold",
+                  }}
                 >
                   {loading
                     ? "Saving..."
@@ -529,7 +537,7 @@ export default function ManageMatches() {
                     onClick={resetForm}
                     style={{
                       padding: "10px 20px",
-                      backgroundColor: "rgb(239, 68, 68)",
+                      backgroundColor: "#6b7280",
                       color: "white",
                       border: "none",
                       borderRadius: "4px",
@@ -548,24 +556,80 @@ export default function ManageMatches() {
 
       {/* Score Tab */}
       {activeTab === "score" && (
-        <div
-          style={{
-            backgroundColor: "#979694ff",
-            padding: "15px",
-            borderRadius: "8px",
-            marginBottom: "20px",
-            border: "2px solid #fbbf24",
-          }}
-        >
-          <strong>💡 Tip:</strong> Click "Add Score" button on any match below
-          to update its score. Standings will be automatically recalculated!
-        </div>
+        <>
+          <div
+            style={{
+              backgroundColor: "#fef3c7",
+              padding: "15px",
+              borderRadius: "8px",
+              marginBottom: "20px",
+              border: "2px solid #fbbf24",
+            }}
+          >
+            <strong>💡 Tip:</strong> Click "Add Score" button on any match below
+            to update its score. Standings will be automatically recalculated!
+          </div>
+
+          {/* Recompute Standings Button */}
+          {selectedLeague && selectedSeason && (
+            <div
+              style={{
+                backgroundColor: "#dbeafe",
+                padding: "15px",
+                borderRadius: "8px",
+                marginBottom: "20px",
+                border: "2px solid #3b82f6",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <strong>🔄 Recompute Standings:</strong> If you see duplicate
+                standings records or incorrect data, click this button to
+                recalculate all standings from scratch.
+              </div>
+              <button
+                onClick={async () => {
+                  if (
+                    !confirm(
+                      "This will delete and recalculate all standings for this league and season. Continue?"
+                    )
+                  )
+                    return;
+                  try {
+                    await leagueService.recomputeStandings(
+                      selectedLeague,
+                      selectedSeason
+                    );
+                    alert("Standings recomputed successfully!");
+                  } catch (error) {
+                    alert("Error recomputing standings: " + error.message);
+                  }
+                }}
+                style={{
+                  padding: "10px 20px",
+                  backgroundColor: "#3b82f6",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  marginLeft: "15px",
+                }}
+              >
+                🔄 Recompute Now
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       {/* Filter Section */}
       <div
         style={{
-          backgroundColor: "#7c7d7eff",
+          backgroundColor: "#f9fafb",
           padding: "15px",
           borderRadius: "8px",
           marginBottom: "20px",
@@ -624,8 +688,8 @@ export default function ManageMatches() {
             }}
           >
             <option value="">Select Season</option>
-            {uniqueSeasonYears.map((season) => (
-              <option key={season.season_id} value={season.year}>
+            {seasons.map((season) => (
+              <option key={season.season_id} value={season.season_id}>
                 {season.year}
               </option>
             ))}
@@ -637,14 +701,13 @@ export default function ManageMatches() {
       <div style={{ overflowX: "auto" }}>
         <table
           style={{
-            color: "#333",
             width: "100%",
             borderCollapse: "collapse",
             backgroundColor: "white",
           }}
         >
           <thead>
-            <tr style={{ backgroundColor: "#7c7d7eff" }}>
+            <tr style={{ backgroundColor: "#f3f4f6" }}>
               <th
                 style={{
                   padding: "12px",
@@ -714,7 +777,7 @@ export default function ManageMatches() {
             {matches.map((match) => (
               <tr
                 key={match.match_id}
-                style={{ borderBottom: "1px solid #ffffff" }}
+                style={{ borderBottom: "1px solid #e5e7eb" }}
               >
                 <td style={{ padding: "12px" }}>{match.matchday}</td>
                 <td style={{ padding: "12px" }}>
@@ -831,7 +894,7 @@ export default function ManageMatches() {
         >
           <div
             style={{
-              backgroundColor: "grey",
+              backgroundColor: "white",
               padding: "30px",
               borderRadius: "8px",
               maxWidth: "500px",

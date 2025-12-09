@@ -6,6 +6,7 @@ from mysql.connector import pooling
 
 app = Flask(__name__)
 app.config.from_object(Config)
+# CORS(app, supports_credentials=True)
 CORS(app)
 
 # Database connection pool

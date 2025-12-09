@@ -1,7 +1,10 @@
 from flask import Blueprint, request, jsonify
 import mysql.connector
+#from flask_cors import CORS
 
 user_bp = Blueprint('user', __name__)
+#CORS(user_bp, supports_credentials=True)
+
 
 def get_db_connection():
     """Import from main app"""
